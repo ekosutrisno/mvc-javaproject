@@ -8,9 +8,9 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/{data-base}
+    url: jdbc:postgresql://localhost:5432/
     username: postgres
-    password: {password}
+    password: akucintakamu
 
   jpa:
     hibernate:
@@ -27,5 +27,5 @@ spring:
               enabled: false
 
 server:
-  port: 8088 
+  port: 8088
 # port localhost
