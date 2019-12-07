@@ -1,0 +1,106 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:with="http://www.thymeleaf.org/extras/with" layout:decorate="~{layout}" with:title="'B210'">
+<th:block layout:fragment="content">
+
+  <div class="bottom">
+    <div class="col">
+      <div class="container">
+        <div class="card p-2">
+          <h1 class="mb-2">Regions</h1>
+          <p class="mb-2x">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus eius
+            id sit corrupti, labore modi distinctio fuga illo quas deleniti voluptates mollitia cumque similique dolorum
+            in officia a quasi.</p>
+          <div class="col-sm-3">
+            <button class="btn btn-primary btn-sm nBtn mb-3"> New Region </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-block">
+            <table class="table table-hover table-bordered table-responsive-sm">
+              <thead>
+                <tr>
+                  <th>Region Id</th>
+                  <th>Region Name</th>
+                  <th>Countries</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr th:each="regi:${regions}">
+                  <td th:text="${regi.regionId}"></td>
+                  <td th:text="${regi.regionName}"></td>
+                  <td>
+                    <p th:each="country:${regi.countries}">
+                      <span th:text="${country.countryName}"></span>
+                    </p>
+                  </td>
+                  <td class="align-middle">
+                    <a href="/home" class="btn mb-2 ml-3 btn-sm btn-primary">Edit</a>
+                    <!--eBtn-->
+                    <a href="/home" class="btn mb-2 ml-3 btn-sm btn-danger">Delete</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <hr />
+          </div>
+          <div class="modal-body">
+            <!-- Content will be loaded here...  -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</th:block>
+<!-- <th:block layout:fragment="region">
+  <script>
+    // AJAX request
+    $(".nBtn, .table .eBtn").click(function () {
+      event.preventDefault();
+      var href = $(this).attr('href');
+      var text = $(this).text();
+      console.log('text : ' + text);
+      if (text == 'Edit') {
+        console.log('href : ' + href);
+        $.ajax({
+          url: '/region/add',
+          dataType: 'html',
+          type: 'get',
+          success: function (response) {
+            console.log('reponse : ' + response);
+            // Add response in Modal body
+            $('.modal-body').html(response);
+            $.get(href, function (dept, status) {
+              $('.myFormUpdate #departmentId').val(dept.departmentId);
+              $('.myFormUpdate #departmentName').val(dept.departmentName);
+              $('.myFormUpdate #locationId').val(dept.locationId);
+            });
+            // Display Modal
+            $('.myFormUpdate #updateModal').modal('show');
+          }
+        });
+      } else {
+        // AJAX request
+        $.ajax({
+          url: '/region/add',
+          dataType: 'html',
+          type: 'get',
+          // data: {},
+          // data: { userid: userid },
+          success: function (response) {
+            console.log('reponse : ' + response);
+            // Add response in Modal body
+            $('.modal-body').html(response);
+            // Display Modal
+            $('.myFormCreate #myModalCreate').modal('show');
+          }
+        });
+      }
+    });
+  </script> -->
+</th:block>
