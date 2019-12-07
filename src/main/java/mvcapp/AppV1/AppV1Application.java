@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AppV1Application {
 
 	public static void main(String[] args) {
+		System.setProperty("spring.config.name", "web-server");
 		SpringApplication.run(AppV1Application.class, args);
 	}
 
