@@ -1,0 +1,95 @@
+<th:block>
+  <div class="myFormCreate">
+    <form th:action="@{/region/save}" th:object="${regionDto}" method="post">
+      <div class="modal fade" id="myModalCreate" tabindex="-1" role="dialog" aria-labelledby="modalLabelCreate"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalLabelCreate">Create Regions</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="alert alert-info">
+                Input data to the fields
+              </p>
+
+              <div class="form-group">
+                <label for="name">Region</label>
+                <input type="text" class="form-control" th:field="*{regionName}" id="category"
+                  placeholder="Region Name">
+              </div>
+              <div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="font-weight-bold"> Country Id</th>
+                      <th class="font-weight-bold"> Country Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="country, itemStat : *{countries}">
+                      <td>
+                        <input class="form-control" th:field="*{countries[__${itemStat.index}__].countryId}" />
+                      </td>
+                      <td>
+                        <input class="form-control" th:field="*{countries[__${itemStat.index}__].countryName}" />
+                      </td>
+                    </tr>
+                </table>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary cs" value="Save" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <!--End form-->
+
+  <!--#Modal form for user update-->
+  <div class="myFormUpdate">
+    <form th:action="@{/region/save}" method="post">
+      <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="updateModalLabel">Update Department</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="alert alert-info">
+                Update data to the fields
+              </p>
+              <div class="form-group">
+                <!--<label for="id" class="col-form-label">User id:</th:text></label>-->
+                <input type="hidden" class="form-control" id="get_regionId" name="get_regionId" value="" />
+              </div>
+              <div class="form-group">
+                <label for="get_regionName" class="col-form-label">Region Name:</label>
+                <input type="text" class="form-control" id="get_regionName" name="get_regionName" value="" />
+              </div>
+              <div class="form-group">
+                <label for="get_regionsCountry" class="col-form-label">Region country</label>
+                <input type="text" class="form-control" id="get_regionsCountry" name="get_regionsCountry" value="" />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary" value="Save" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!--End update form-->

@@ -17,7 +17,7 @@
 
         <div class="card">
           <div class="card-block">
-            <table class="table table-hover table-bordered table-responsive-sm">
+            <table class="table table-hover table-bordered">
               <thead>
                 <tr>
                   <th>Region Id</th>
@@ -37,9 +37,11 @@
                     </p>
                   </td>
                   <td class="align-middle">
-                    <a href="/home" class="btn mb-2 ml-3 btn-sm btn-primary">Edit</a>
-                    <!--eBtn-->
-                    <a href="/home" class="btn mb-2 ml-3 btn-sm btn-danger">Delete</a>
+                    <!-- <a th:href="@{/region/edit/(id=${regi.regionId})}" class=" btn mb-2 ml-3 btn-sm btn-primary
+                      eBtn">Edit</a>
+                     -->
+                    <a th:href="@{/region/delete/(id=${regi.regionId})}" class="btn mb-2 ml-3 btn-sm btn-danger eBtn">
+                      Delete</a>
                   </td>
                 </tr>
               </tbody>
@@ -54,53 +56,67 @@
 
     </div>
   </div>
-
-
 </th:block>
-<!-- <th:block layout:fragment="region">
+<th:block layout:fragment="region">
   <script>
     // AJAX request
-    $(".nBtn, .table .eBtn").click(function () {
+    $(".nBtn").click(function () {
       event.preventDefault();
       var href = $(this).attr('href');
       var text = $(this).text();
       console.log('text : ' + text);
-      if (text == 'Edit') {
-        console.log('href : ' + href);
-        $.ajax({
-          url: '/region/add',
-          dataType: 'html',
-          type: 'get',
-          success: function (response) {
-            console.log('reponse : ' + response);
-            // Add response in Modal body
-            $('.modal-body').html(response);
-            $.get(href, function (dept, status) {
-              $('.myFormUpdate #departmentId').val(dept.departmentId);
-              $('.myFormUpdate #departmentName').val(dept.departmentName);
-              $('.myFormUpdate #locationId').val(dept.locationId);
-            });
-            // Display Modal
-            $('.myFormUpdate #updateModal').modal('show');
-          }
-        });
-      } else {
-        // AJAX request
-        $.ajax({
-          url: '/region/add',
-          dataType: 'html',
-          type: 'get',
-          // data: {},
-          // data: { userid: userid },
-          success: function (response) {
-            console.log('reponse : ' + response);
-            // Add response in Modal body
-            $('.modal-body').html(response);
-            // Display Modal
-            $('.myFormCreate #myModalCreate').modal('show');
-          }
-        });
-      }
+
+      $.ajax({
+        url: '/region/add',
+        dataType: 'html',
+        type: 'get',
+        success: function (response) {
+          console.log('reponse : ' + response);
+          $('.modal-body').html(response);
+          $('.myFormCreate #myModalCreate').modal('show');
+          $('.cs').on('click', function () {
+            $('.myFormCreate #myModalCreate').modal('hide');
+            Swal.fire(
+              'Berhasil!',
+              'Data Region telah ditambahkan.',
+              'success'
+            )
+          });
+
+        },
+        error: function () {
+          Swal.fire(
+            'Gagal!',
+            'Data Region gagal ditambahkan. ',
+            'error'
+          )
+        }
+      });
     });
-  </script> -->
+
+
+    $(".table .eBtn").on('click', function (event) {
+      event.preventDefault();
+      const href = $(this).attr('href');
+      swal.fire({
+        title: 'Apakah kamu yakin?',
+        text: "Kamu tidak dapat mengambalikan data!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Hapus',
+        cancelButtonText: 'Jangan'
+      }).then((result) => {
+        if (result.value) {
+          document.location.href = href;
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
+    });
+  </script>
 </th:block>

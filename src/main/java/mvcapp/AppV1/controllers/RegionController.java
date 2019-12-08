@@ -1,6 +1,7 @@
 package mvcapp.AppV1.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -40,7 +42,7 @@ public class RegionController {
     }
     model.addAttribute("regionDto", regionDto);
 
-    return "pages/addEditRegion";
+    return "pages/regionEdit";
   }
 
   @PostMapping("/save")
@@ -53,4 +55,15 @@ public class RegionController {
     return "redirect:/region/";
   }
 
+  @GetMapping("/edit")
+  @ResponseBody
+  public Optional<RegionsModel> editRegion(Integer id) {
+    return regionsService.findRegById(id);
+  }
+
+  @GetMapping("/delete")
+  public String delete(Integer id) {
+    regionsService.deleteReg(id);
+    return "redirect:/region/";
+  }
 }

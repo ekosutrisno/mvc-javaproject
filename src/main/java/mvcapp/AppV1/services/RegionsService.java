@@ -1,5 +1,7 @@
 package mvcapp.AppV1.services;
 
+import java.util.Optional;
+
 import mvcapp.AppV1.models.RegionsModel;
 
 /**
@@ -12,4 +14,7 @@ public interface RegionsService {
 
   void saveAll(Iterable<RegionsModel> regionsModel);
 
+  public Optional<RegionsModel> findRegById(Integer regId);
+
+  void deleteReg(Integer regId);
 }
