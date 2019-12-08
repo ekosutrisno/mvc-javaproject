@@ -29,7 +29,7 @@ public class locationsModel {
   @Size(max = 40)
   private String streetAddress;
 
-  @Column(name = "postal_code")
+  @Column(name = "postal_code", insertable = false, updatable = false)
   @Size(max = 12)
   private String postalKode;
 
